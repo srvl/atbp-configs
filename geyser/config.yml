@@ -1,0 +1,3 @@
+# Geyser configuration
+# clone-remote-port is enabled for compatibility with remote port cloning.
+clone-remote-port: true
