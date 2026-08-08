@@ -77,7 +77,7 @@ chunks:
     wither_skull: 4
   fixed-chunk-inhabited-time: -1
   flush-regions-on-save: false
-  max-auto-save-chunks-per-tick: 24
+  max-auto-save-chunks-per-tick: 16
   prevent-moving-into-unloaded-chunks: true
 collisions:
   allow-player-cramming-damage: false
@@ -116,7 +116,7 @@ entities:
     mobs-can-always-pick-up-loot:
       skeletons: false
       zombies: false
-    nerf-pigmen-from-nether-portals: false
+    nerf-pigmen-from-nether-portals: true
     only-merge-items-horizontally: false
     parrots-are-unaffected-by-player-movement: false
     phantoms-do-not-spawn-on-creative-players: true
@@ -136,7 +136,6 @@ entities:
     player-insomnia-start-ticks: 72000
     should-remove-dragon: false
     spawner-nerfed-mobs-should-jump: true
-    stuck-entity-poi-retry-delay: 200
     zombie-villager-infection-chance: default
     zombies-target-turtle-eggs: true
   markers:
@@ -196,7 +195,6 @@ entities:
     - Motion
     - sleeping_pos
     iron-golems-can-spawn-in-air: false
-    max-arrow-despawn-invulnerability: 200
     monster-spawn-max-light-level: default
     non-player-arrow-despawn-rate: 10
     per-player-mob-spawns: true
@@ -313,7 +311,6 @@ max-growth-height:
   cactus: 3
   reeds: 3
 misc:
-  allow-remote-ender-dragon-respawning: false
   alternate-current-update-order: HORIZONTAL_FIRST_OUTWARD
   disable-end-credits: false
   disable-relative-projectile-velocity: false
@@ -348,6 +345,3 @@ tick-rates:
 unsupported-settings:
   disable-world-ticking-when-empty: false
   fix-invulnerable-end-crystal-exploit: true
-  ticking:
-    block-entities: true
-    chunks: true
