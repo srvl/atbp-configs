@@ -13,7 +13,7 @@
 # Discord: https://discord.gg/papermc
 # Website: https://papermc.io/
 
-_version: 31
+_version: 30
 anticheat:
   obfuscation:
     items:
@@ -43,6 +43,7 @@ chunk-loading-basic:
   player-max-chunk-load-rate: 100.0
   player-max-chunk-send-rate: 75.0
 chunk-system:
+  gen-parallelism: default
   io-threads: -1
   worker-threads: -1
 collisions:
@@ -51,6 +52,7 @@ collisions:
 commands:
   ride-command-allow-player-as-vehicle: false
   suggest-player-names-when-null-tab-completions: true
+  time-command-affects-all-worlds: false
 console:
   enable-brigadier-completions: true
   enable-brigadier-highlighting: true
@@ -66,6 +68,8 @@ item-validation:
   display-name: 8192
   lore-line: 8192
   resolve-selectors-in-books: false
+logging:
+  deobfuscate-stacktraces: true
 max-auto-save-chunks-per-tick: 8
 messages:
   kick:
@@ -77,17 +81,13 @@ messages:
     Please contact the server administrators if you believe that this is in error.
   use-display-name-in-quit-message: false
 misc:
-  catchup-ticks: default
   chat-threads:
     chat-executor-core-size: -1
     chat-executor-max-size: -1
   client-interaction-leniency-distance: default
   compression-level: default
-  enable-nether: true
-  fix-far-end-terrain-generation: true
   load-permissions-yml-before-plugins: true
   max-joins-per-tick: 5
-  max-tracking-combat-entries: 10240
   prevent-negative-villager-demand: false
   region-file-cache-size: 256
   send-full-pos-for-item-entities: false
@@ -129,21 +129,16 @@ spam-limiter:
 spark:
   enable-immediately: false
   enabled: true
-time:
-  affects-all-worlds: false
 unsupported-settings:
   allow-headless-pistons: false
   allow-permanent-block-break-exploits: false
   allow-piston-duplication: false
   allow-unsafe-end-portal-teleportation: false
-  oversized-item-component-sanitizer:
-    dont-sanitize: []
+  compression-format: ZLIB
   perform-username-validation: true
   skip-tripwire-hook-placement-validation: false
   skip-vanilla-damage-tick-when-shield-blocked: false
   update-equipment-on-player-actions: true
-update-checker:
-  enabled: true
 watchdog:
   early-warning-delay: 10000
   early-warning-every: 5000

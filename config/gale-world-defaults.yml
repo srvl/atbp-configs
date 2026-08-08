@@ -13,6 +13,7 @@
 
 _version: 1
 gameplay-mechanics:
+  arrow-movement-resets-despawn-counter: true
   entities-can-random-stroll-into-non-ticking-chunks: true
   entity-wake-up-duration-ratio-standard-deviation: 0.2
   fixes:
@@ -32,6 +33,20 @@ small-optimizations:
       reset-movement-after-reach-limit: false
     per-tick: 10
   reduced-intervals:
+    acquire-poi-for-stuck-entity: 60
+    check-nearby-item:
+      hopper:
+        interval: 10
+        minecart:
+          interval: 10
+          temporary-immunity:
+            check-for-minecart-near-item-interval: 20
+            check-for-minecart-near-item-while-active: false
+            check-for-minecart-near-item-while-inactive: true
+            duration: 100
+            max-item-horizontal-distance: 24.0
+            max-item-vertical-distance: 4.0
+            nearby-item-max-age: 1200
     check-stuck-in-wall: 10
     villager-item-repickup: 100
   save-fireworks: true

@@ -77,7 +77,7 @@ chunks:
     wither_skull: 4
   fixed-chunk-inhabited-time: -1
   flush-regions-on-save: false
-  max-auto-save-chunks-per-tick: 24
+  max-auto-save-chunks-per-tick: 16
   prevent-moving-into-unloaded-chunks: true
 collisions:
   allow-player-cramming-damage: false
@@ -116,7 +116,7 @@ entities:
     mobs-can-always-pick-up-loot:
       skeletons: false
       zombies: false
-    nerf-pigmen-from-nether-portals: false
+    nerf-pigmen-from-nether-portals: true
     only-merge-items-horizontally: false
     parrots-are-unaffected-by-player-movement: false
     phantoms-do-not-spawn-on-creative-players: true
@@ -348,6 +348,3 @@ tick-rates:
 unsupported-settings:
   disable-world-ticking-when-empty: false
   fix-invulnerable-end-crystal-exploit: true
-  ticking:
-    block-entities: true
-    chunks: true
