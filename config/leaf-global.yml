@@ -100,6 +100,11 @@ performance:
       avoid-entity: 30
       temptation: 30
       enderman-look-for-player: 30
+  fast-biome-manager-seed-obfuscation:
+    # Replace vanilla SHA-256 seed obfuscation in BiomeManager with XXHash.
+    enabled: false
+    # Seed obfuscation key for XXHash.
+    seed-obfuscation-key: -8606476712805967876
   # Use faster random generator?
   # Requires a JVM that supports Xoroshiro128PlusPlus.
   # Some JREs don't support this.
@@ -125,10 +130,6 @@ performance:
     advancements: true
   optimize-block-entities: true
   optimize-mob-despawn: false
-  optimize-end-surface-gen:
-    # Skip trivial End surface rule build process.
-    # May be incompatible with some datapacks that modify End world generation.
-    enabled: true
   # Whether to only tick / update items in main hand and offhand instead of the entire inventory.
   only-tick-items-in-hand: false
   optimize-mob-spawning: true
@@ -205,7 +206,7 @@ fixes:
     mc-301114-max-entries: 10240
     # Whether to fix the bug End City ship generation gets cut at chunk borders.
     # Mojira link: https://mojira.dev/MC-152094
-    mc-152094: true
+    mc-152094: false
   # Prevents entities from moving into weak loaded chunks.
   prevent-moving-into-weak-loaded-chunks:
     # Set to true to enable features below.
@@ -280,7 +281,7 @@ gameplay-mechanisms:
     # Maximum delay (in ticks) between spawner spawns. Higher values slow down spawners.
     max-spawn-delay: 800
   use-spigot-item-merging-mechanism: false
-  use-vanilla-hopper: false
+  use-vanilla-hopper: true
 
 #############
 #  NETWORK  #
@@ -309,7 +310,7 @@ network:
     asteorbar-protocol: false
     chatimage-protocol: false
     xaero-map-protocol: false
-    xaero-map-server-id: -1134738775
+    xaero-map-server-id: -975630756
     syncmatica-protocol: false
     syncmatica-quota: false
     syncmatica-quota-limit: 40000000
