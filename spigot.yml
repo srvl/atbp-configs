@@ -50,8 +50,15 @@ world-settings:
     view-distance: default
     simulation-distance: default
     thunder-chance: 100000
+    merge-radius:
+      item: 2.5
+      exp: 3.5
+    mob-spawn-range: 3
+    item-despawn-rate: 6000
+    arrow-despawn-rate: 1200
+    trident-despawn-rate: 1200
     zombie-aggressive-towards-villager: true
-    nerf-spawner-mobs: true
+    nerf-spawner-mobs: false
     enable-zombie-pigmen-portal-spawns: true
     wither-spawn-sound-radius: 0
     end-portal-sound-radius: 0
@@ -81,12 +88,12 @@ world-settings:
       glowberry-modifier: 100
       pitcherplant-modifier: 100
     entity-activation-range:
-      animals: 32
-      monsters: 32
-      raiders: 64
-      misc: 16
-      water: 16
-      villagers: 32
+      animals: 12
+      monsters: 24
+      raiders: 56
+      misc: 8
+      water: 8
+      villagers: 24
       flying-monsters: 32
       wake-up-inactive:
         animals-max-per-tick: 4
@@ -111,7 +118,7 @@ world-settings:
       animals: 64
       monsters: 64
       misc: 64
-      display: 96
+      display: 72
       other: 64
     ticks-per:
       hopper-transfer: 8
@@ -152,13 +159,6 @@ world-settings:
     max-tick-time:
       tile: 50
       entity: 50
-    merge-radius:
-      item: 2.5
-      exp: 3.5
-    mob-spawn-range: 3
-    item-despawn-rate: 6000
-    arrow-despawn-rate: 1200
-    trident-despawn-rate: 1200
     verbose: false
 players:
   disable-saving: false
