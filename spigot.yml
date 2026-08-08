@@ -10,15 +10,20 @@
 # Discord: https://discord.gg/papermc
 # Website: https://papermc.io/
 
+messages:
+  whitelist: You are not whitelisted on this server!
+  server-full: The server is full!
+  outdated-client: Outdated client! Please use {0}
+  outdated-server: Outdated server! I'm still on {0}
+  restart: Server is restarting
 settings:
-  debug: false
   bungeecord: false
+  save-user-cache-on-stop-only: false
   sample-count: 12
   player-shuffle: 0
   user-cache-size: 1000
-  save-user-cache-on-stop-only: false
-  moved-wrongly-threshold: 10.0625
-  moved-too-quickly-multiplier: 100.0
+  moved-wrongly-threshold: 0.0625
+  moved-too-quickly-multiplier: 10.0
   timeout-time: 60
   restart-on-crash: true
   restart-script: ./start.sh
@@ -34,12 +39,7 @@ settings:
       max: 2048.0
   log-villager-deaths: true
   log-named-deaths: true
-messages:
-  whitelist: You are not whitelisted on this server!
-  server-full: The server is full!
-  outdated-client: Outdated client! Please use {0}
-  outdated-server: Outdated server! I'm still on {0}
-  restart: Server is restarting
+  debug: false
 advancements:
   disable-saving: false
   disabled:
@@ -50,8 +50,15 @@ world-settings:
     view-distance: default
     simulation-distance: default
     thunder-chance: 100000
+    merge-radius:
+      item: 2.5
+      exp: 3.5
+    mob-spawn-range: 3
+    item-despawn-rate: 6000
+    arrow-despawn-rate: 1200
+    trident-despawn-rate: 1200
     zombie-aggressive-towards-villager: true
-    nerf-spawner-mobs: true
+    nerf-spawner-mobs: false
     enable-zombie-pigmen-portal-spawns: true
     wither-spawn-sound-radius: 0
     end-portal-sound-radius: 0
@@ -107,10 +114,10 @@ world-settings:
       tick-inactive-villagers: false
       ignore-spectators: false
     entity-tracking-range:
-      players: 64
-      animals: 64
-      monsters: 64
-      misc: 64
+      players: 48
+      animals: 48
+      monsters: 48
+      misc: 48
       display: 96
       other: 64
     ticks-per:
@@ -152,24 +159,17 @@ world-settings:
     max-tick-time:
       tile: 50
       entity: 50
-    merge-radius:
-      item: 2.5
-      exp: 3.5
-    mob-spawn-range: 3
-    item-despawn-rate: 6000
-    arrow-despawn-rate: 1200
-    trident-despawn-rate: 1200
     verbose: false
 players:
   disable-saving: false
-config-version: 13
+config-version: 12
 stats:
   disable-saving: false
   forced-stats: {}
 commands:
-  log: true
   tab-complete: 0
   send-namespaced: true
+  log: true
   spam-exclusions:
   - /skill
   silent-commandblock-console: false
