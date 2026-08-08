@@ -36,9 +36,10 @@ settings:
       run-with-scissors: <player> slipped and fell on their shears
       stonecutter: <player> has sawed themself in half
   register-minecraft-debug-commands: false
-  register-minecraft-disabled-commands: false
+  server-mod-name: Leaf
   disable-give-dropping: false
   bee-count-payload: false
+  tps-catchup: true
   fix-projectile-looting-transfer: false
   clamp-attributes: true
   limit-armor: true
@@ -104,7 +105,6 @@ settings:
     ender_chest:
       six-rows: false
       use-permissions-for-rows: false
-      persist-hidden-rows: true
     crying_obsidian:
       valid-for-portal-frame: false
     beehive:
@@ -151,20 +151,6 @@ settings:
   username-valid-characters: ^[a-zA-Z0-9_.]*$
   blast-resistance-overrides: {}
   block-fall-multipliers:
-    minecraft:cyan_bed:
-      distance: 0.5
-    minecraft:blue_bed:
-      distance: 0.5
-    minecraft:green_bed:
-      distance: 0.5
-    minecraft:orange_bed:
-      distance: 0.5
-    minecraft:black_bed:
-      distance: 0.5
-    minecraft:yellow_bed:
-      distance: 0.5
-    minecraft:lime_bed:
-      distance: 0.5
     minecraft:brown_bed:
       distance: 0.5
     minecraft:light_gray_bed:
@@ -185,7 +171,21 @@ settings:
       distance: 0.5
     minecraft:gray_bed:
       distance: 0.5
-config-version: 48
+    minecraft:cyan_bed:
+      distance: 0.5
+    minecraft:blue_bed:
+      distance: 0.5
+    minecraft:green_bed:
+      distance: 0.5
+    minecraft:orange_bed:
+      distance: 0.5
+    minecraft:black_bed:
+      distance: 0.5
+    minecraft:yellow_bed:
+      distance: 0.5
+    minecraft:lime_bed:
+      distance: 0.5
+config-version: 41
 world-settings:
   default:
     blocks:
@@ -213,9 +213,9 @@ world-settings:
         explosion-effect: BLOCK
       big_dripleaf:
         tilt-delay:
+          UNSTABLE: 10
           FULL: 100
           PARTIAL: 10
-          UNSTABLE: 10
       cactus:
         breaks-from-solid-neighbors: true
         affected-by-bonemeal: false
@@ -251,7 +251,7 @@ world-settings:
           explosion-effect: BLOCK
         cramming-amount: 0
       farmland:
-        mob-griefing-override: default
+        bypass-mob-griefing: false
         gets-moist-from-below: false
         use-alpha-farmland: false
         disable-trampling: false
@@ -277,7 +277,7 @@ world-settings:
       magma-block:
         damage-when-sneaking: false
       powder_snow:
-        mob-griefing-override: default
+        bypass-mob-griefing: false
       powered-rail:
         activation-range: 8
       respawn_anchor:
@@ -293,7 +293,6 @@ world-settings:
         break-individual-slabs-when-sneaking: false
       spawner:
         deactivate-by-redstone: false
-        fix-mc-238526: false
       sponge:
         absorption:
           area: 65
@@ -306,7 +305,7 @@ world-settings:
         break-from-exp-orbs: false
         break-from-items: false
         break-from-minecarts: false
-        mob-griefing-override: default
+        bypass-mob-griefing: false
         random-tick-crack-chance: 500
         feather-fall-distance-affects-trampling: false
       water:
@@ -329,442 +328,314 @@ world-settings:
           powder-snow: 0.10000000149011612
           dripstone-water: 0.17578125
           dripstone-lava: 0.05859375
-      leaves:
-        instant-decay: false
     tools:
       axe:
         strippables:
-          minecraft:spruce_wood:
-            drops: {}
-            into: minecraft:stripped_spruce_wood
-          minecraft:acacia_wood:
-            drops: {}
-            into: minecraft:stripped_acacia_wood
-          minecraft:oak_log:
-            drops: {}
-            into: minecraft:stripped_oak_log
-          minecraft:jungle_wood:
-            drops: {}
-            into: minecraft:stripped_jungle_wood
-          minecraft:jungle_log:
-            drops: {}
-            into: minecraft:stripped_jungle_log
-          minecraft:oak_wood:
-            drops: {}
-            into: minecraft:stripped_oak_wood
-          minecraft:mangrove_log:
-            drops: {}
-            into: minecraft:stripped_mangrove_log
-          minecraft:birch_wood:
-            drops: {}
-            into: minecraft:stripped_birch_wood
-          minecraft:crimson_stem:
-            drops: {}
-            into: minecraft:stripped_crimson_stem
-          minecraft:warped_hyphae:
-            drops: {}
-            into: minecraft:stripped_warped_hyphae
           minecraft:birch_log:
-            drops: {}
             into: minecraft:stripped_birch_log
+            drops: {}
           minecraft:warped_stem:
-            drops: {}
             into: minecraft:stripped_warped_stem
+            drops: {}
           minecraft:spruce_log:
-            drops: {}
             into: minecraft:stripped_spruce_log
+            drops: {}
           minecraft:dark_oak_wood:
-            drops: {}
             into: minecraft:stripped_dark_oak_wood
+            drops: {}
           minecraft:pale_oak_log:
-            drops: {}
             into: minecraft:stripped_pale_oak_log
+            drops: {}
           minecraft:crimson_hyphae:
-            drops: {}
             into: minecraft:stripped_crimson_hyphae
+            drops: {}
           minecraft:bamboo_block:
-            drops: {}
             into: minecraft:stripped_bamboo_block
+            drops: {}
           minecraft:cherry_wood:
-            drops: {}
             into: minecraft:stripped_cherry_wood
+            drops: {}
           minecraft:cherry_log:
-            drops: {}
             into: minecraft:stripped_cherry_log
+            drops: {}
           minecraft:mangrove_wood:
-            drops: {}
             into: minecraft:stripped_mangrove_wood
+            drops: {}
           minecraft:pale_oak_wood:
-            drops: {}
             into: minecraft:stripped_pale_oak_wood
+            drops: {}
           minecraft:acacia_log:
-            drops: {}
             into: minecraft:stripped_acacia_log
+            drops: {}
           minecraft:dark_oak_log:
-            drops: {}
             into: minecraft:stripped_dark_oak_log
+            drops: {}
+          minecraft:spruce_wood:
+            into: minecraft:stripped_spruce_wood
+            drops: {}
+          minecraft:acacia_wood:
+            into: minecraft:stripped_acacia_wood
+            drops: {}
+          minecraft:oak_log:
+            into: minecraft:stripped_oak_log
+            drops: {}
+          minecraft:jungle_wood:
+            into: minecraft:stripped_jungle_wood
+            drops: {}
+          minecraft:jungle_log:
+            into: minecraft:stripped_jungle_log
+            drops: {}
+          minecraft:oak_wood:
+            into: minecraft:stripped_oak_wood
+            drops: {}
+          minecraft:mangrove_log:
+            into: minecraft:stripped_mangrove_log
+            drops: {}
+          minecraft:birch_wood:
+            into: minecraft:stripped_birch_wood
+            drops: {}
+          minecraft:crimson_stem:
+            into: minecraft:stripped_crimson_stem
+            drops: {}
+          minecraft:warped_hyphae:
+            into: minecraft:stripped_warped_hyphae
+            drops: {}
         waxables:
-          minecraft:waxed_oxidized_cut_copper_slab:
-            drops: {}
-            into: minecraft:oxidized_cut_copper_slab
-          minecraft:waxed_weathered_copper_chest:
-            drops: {}
-            into: minecraft:weathered_copper_chest
-          minecraft:waxed_oxidized_copper_trapdoor:
-            drops: {}
-            into: minecraft:oxidized_copper_trapdoor
-          minecraft:waxed_weathered_copper_golem_statue:
-            drops: {}
-            into: minecraft:weathered_copper_golem_statue
-          minecraft:waxed_weathered_lightning_rod:
-            drops: {}
-            into: minecraft:weathered_lightning_rod
-          minecraft:waxed_cut_copper_stairs:
-            drops: {}
-            into: minecraft:cut_copper_stairs
-          minecraft:waxed_weathered_copper_lantern:
-            drops: {}
-            into: minecraft:weathered_copper_lantern
-          minecraft:waxed_weathered_cut_copper:
-            drops: {}
-            into: minecraft:weathered_cut_copper
-          minecraft:waxed_exposed_copper_golem_statue:
-            drops: {}
-            into: minecraft:exposed_copper_golem_statue
-          minecraft:waxed_oxidized_copper:
-            drops: {}
-            into: minecraft:oxidized_copper
-          minecraft:waxed_exposed_cut_copper_stairs:
-            drops: {}
-            into: minecraft:exposed_cut_copper_stairs
-          minecraft:waxed_weathered_copper:
-            drops: {}
-            into: minecraft:weathered_copper
-          minecraft:waxed_exposed_lightning_rod:
-            drops: {}
-            into: minecraft:exposed_lightning_rod
-          minecraft:waxed_copper_chest:
-            drops: {}
-            into: minecraft:copper_chest
-          minecraft:waxed_oxidized_copper_golem_statue:
-            drops: {}
-            into: minecraft:oxidized_copper_golem_statue
-          minecraft:waxed_weathered_copper_grate:
-            drops: {}
-            into: minecraft:weathered_copper_grate
-          minecraft:waxed_exposed_copper_grate:
-            drops: {}
-            into: minecraft:exposed_copper_grate
-          minecraft:waxed_exposed_chiseled_copper:
-            drops: {}
-            into: minecraft:exposed_chiseled_copper
-          minecraft:waxed_chiseled_copper:
-            drops: {}
-            into: minecraft:chiseled_copper
-          minecraft:waxed_exposed_cut_copper:
-            drops: {}
-            into: minecraft:exposed_cut_copper
-          minecraft:waxed_copper_bulb:
-            drops: {}
-            into: minecraft:copper_bulb
-          minecraft:waxed_oxidized_copper_chain:
-            drops: {}
-            into: minecraft:oxidized_copper_chain
-          minecraft:waxed_copper_block:
-            drops: {}
-            into: minecraft:copper_block
-          minecraft:waxed_weathered_copper_bulb:
-            drops: {}
-            into: minecraft:weathered_copper_bulb
-          minecraft:waxed_oxidized_copper_bars:
-            drops: {}
-            into: minecraft:oxidized_copper_bars
-          minecraft:waxed_exposed_copper_bars:
-            drops: {}
-            into: minecraft:exposed_copper_bars
-          minecraft:waxed_weathered_cut_copper_stairs:
-            drops: {}
-            into: minecraft:weathered_cut_copper_stairs
-          minecraft:waxed_weathered_chiseled_copper:
-            drops: {}
-            into: minecraft:weathered_chiseled_copper
-          minecraft:waxed_oxidized_cut_copper_stairs:
-            drops: {}
-            into: minecraft:oxidized_cut_copper_stairs
-          minecraft:waxed_oxidized_lightning_rod:
-            drops: {}
-            into: minecraft:oxidized_lightning_rod
-          minecraft:waxed_copper_grate:
-            drops: {}
-            into: minecraft:copper_grate
-          minecraft:waxed_oxidized_copper_door:
-            drops: {}
-            into: minecraft:oxidized_copper_door
-          minecraft:waxed_exposed_copper_lantern:
-            drops: {}
-            into: minecraft:exposed_copper_lantern
-          minecraft:waxed_exposed_copper_door:
-            drops: {}
-            into: minecraft:exposed_copper_door
-          minecraft:waxed_exposed_cut_copper_slab:
-            drops: {}
-            into: minecraft:exposed_cut_copper_slab
-          minecraft:waxed_oxidized_copper_lantern:
-            drops: {}
-            into: minecraft:oxidized_copper_lantern
-          minecraft:waxed_exposed_copper_trapdoor:
-            drops: {}
-            into: minecraft:exposed_copper_trapdoor
-          minecraft:waxed_exposed_copper_chain:
-            drops: {}
-            into: minecraft:exposed_copper_chain
-          minecraft:waxed_oxidized_copper_chest:
-            drops: {}
-            into: minecraft:oxidized_copper_chest
-          minecraft:waxed_exposed_copper:
-            drops: {}
-            into: minecraft:exposed_copper
-          minecraft:waxed_weathered_copper_chain:
-            drops: {}
-            into: minecraft:weathered_copper_chain
-          minecraft:waxed_cut_copper_slab:
-            drops: {}
-            into: minecraft:cut_copper_slab
-          minecraft:waxed_copper_trapdoor:
-            drops: {}
-            into: minecraft:copper_trapdoor
-          minecraft:waxed_oxidized_chiseled_copper:
-            drops: {}
-            into: minecraft:oxidized_chiseled_copper
-          minecraft:waxed_weathered_copper_trapdoor:
-            drops: {}
-            into: minecraft:weathered_copper_trapdoor
-          minecraft:waxed_copper_bars:
-            drops: {}
-            into: minecraft:copper_bars
-          minecraft:waxed_weathered_copper_bars:
-            drops: {}
-            into: minecraft:weathered_copper_bars
-          minecraft:waxed_weathered_cut_copper_slab:
-            drops: {}
-            into: minecraft:weathered_cut_copper_slab
-          minecraft:waxed_copper_lantern:
-            drops: {}
-            into: minecraft:copper_lantern
-          minecraft:waxed_copper_golem_statue:
-            drops: {}
-            into: minecraft:copper_golem_statue
-          minecraft:waxed_oxidized_copper_bulb:
-            drops: {}
-            into: minecraft:oxidized_copper_bulb
-          minecraft:waxed_copper_chain:
-            drops: {}
-            into: minecraft:copper_chain
-          minecraft:waxed_exposed_copper_bulb:
-            drops: {}
-            into: minecraft:exposed_copper_bulb
-          minecraft:waxed_oxidized_copper_grate:
-            drops: {}
-            into: minecraft:oxidized_copper_grate
-          minecraft:waxed_copper_door:
-            drops: {}
-            into: minecraft:copper_door
-          minecraft:waxed_cut_copper:
-            drops: {}
-            into: minecraft:cut_copper
-          minecraft:waxed_lightning_rod:
-            drops: {}
-            into: minecraft:lightning_rod
-          minecraft:waxed_exposed_copper_chest:
-            drops: {}
-            into: minecraft:exposed_copper_chest
           minecraft:waxed_oxidized_cut_copper:
-            drops: {}
             into: minecraft:oxidized_cut_copper
+            drops: {}
           minecraft:waxed_weathered_copper_door:
-            drops: {}
             into: minecraft:weathered_copper_door
-        weatherables:
-          minecraft:weathered_copper_golem_statue:
             drops: {}
-            into: minecraft:exposed_copper_golem_statue
-          minecraft:weathered_copper_chain:
-            drops: {}
-            into: minecraft:exposed_copper_chain
-          minecraft:exposed_copper_bars:
-            drops: {}
-            into: minecraft:copper_bars
-          minecraft:exposed_copper:
-            drops: {}
-            into: minecraft:copper_block
-          minecraft:weathered_lightning_rod:
-            drops: {}
-            into: minecraft:exposed_lightning_rod
-          minecraft:exposed_copper_chain:
-            drops: {}
-            into: minecraft:copper_chain
-          minecraft:oxidized_copper_trapdoor:
-            drops: {}
-            into: minecraft:weathered_copper_trapdoor
-          minecraft:exposed_copper_lantern:
-            drops: {}
-            into: minecraft:copper_lantern
-          minecraft:weathered_copper_door:
-            drops: {}
-            into: minecraft:exposed_copper_door
-          minecraft:weathered_cut_copper_stairs:
-            drops: {}
-            into: minecraft:exposed_cut_copper_stairs
-          minecraft:weathered_copper:
-            drops: {}
-            into: minecraft:exposed_copper
-          minecraft:exposed_lightning_rod:
-            drops: {}
-            into: minecraft:lightning_rod
-          minecraft:weathered_copper_trapdoor:
-            drops: {}
-            into: minecraft:exposed_copper_trapdoor
-          minecraft:oxidized_copper_door:
-            drops: {}
-            into: minecraft:weathered_copper_door
-          minecraft:weathered_copper_bulb:
-            drops: {}
-            into: minecraft:exposed_copper_bulb
-          minecraft:oxidized_copper_lantern:
-            drops: {}
-            into: minecraft:weathered_copper_lantern
-          minecraft:oxidized_lightning_rod:
-            drops: {}
-            into: minecraft:weathered_lightning_rod
-          minecraft:oxidized_chiseled_copper:
-            drops: {}
-            into: minecraft:weathered_chiseled_copper
-          minecraft:weathered_cut_copper:
-            drops: {}
-            into: minecraft:exposed_cut_copper
-          minecraft:exposed_copper_trapdoor:
-            drops: {}
-            into: minecraft:copper_trapdoor
-          minecraft:oxidized_cut_copper_slab:
-            drops: {}
-            into: minecraft:weathered_cut_copper_slab
-          minecraft:oxidized_copper_bulb:
-            drops: {}
-            into: minecraft:weathered_copper_bulb
-          minecraft:oxidized_cut_copper:
-            drops: {}
-            into: minecraft:weathered_cut_copper
-          minecraft:oxidized_cut_copper_stairs:
-            drops: {}
+          minecraft:waxed_weathered_cut_copper_stairs:
             into: minecraft:weathered_cut_copper_stairs
-          minecraft:exposed_copper_golem_statue:
             drops: {}
-            into: minecraft:copper_golem_statue
-          minecraft:exposed_copper_door:
+          minecraft:waxed_oxidized_cut_copper_slab:
+            into: minecraft:oxidized_cut_copper_slab
             drops: {}
-            into: minecraft:copper_door
-          minecraft:exposed_cut_copper:
-            drops: {}
-            into: minecraft:cut_copper
-          minecraft:weathered_chiseled_copper:
-            drops: {}
-            into: minecraft:exposed_chiseled_copper
-          minecraft:exposed_cut_copper_stairs:
-            drops: {}
-            into: minecraft:cut_copper_stairs
-          minecraft:weathered_cut_copper_slab:
-            drops: {}
-            into: minecraft:exposed_cut_copper_slab
-          minecraft:oxidized_copper_golem_statue:
-            drops: {}
-            into: minecraft:weathered_copper_golem_statue
-          minecraft:weathered_copper_bars:
-            drops: {}
-            into: minecraft:exposed_copper_bars
-          minecraft:exposed_copper_bulb:
-            drops: {}
-            into: minecraft:copper_bulb
-          minecraft:exposed_chiseled_copper:
-            drops: {}
-            into: minecraft:chiseled_copper
-          minecraft:oxidized_copper:
-            drops: {}
-            into: minecraft:weathered_copper
-          minecraft:oxidized_copper_chest:
-            drops: {}
-            into: minecraft:weathered_copper_chest
-          minecraft:exposed_cut_copper_slab:
-            drops: {}
+          minecraft:waxed_cut_copper_slab:
             into: minecraft:cut_copper_slab
-          minecraft:oxidized_copper_bars:
             drops: {}
-            into: minecraft:weathered_copper_bars
-          minecraft:weathered_copper_chest:
+          minecraft:waxed_exposed_cut_copper:
+            into: minecraft:exposed_cut_copper
             drops: {}
-            into: minecraft:exposed_copper_chest
-          minecraft:oxidized_copper_grate:
+          minecraft:waxed_oxidized_copper_bulb:
+            into: minecraft:oxidized_copper_bulb
             drops: {}
-            into: minecraft:weathered_copper_grate
-          minecraft:weathered_copper_grate:
+          minecraft:waxed_oxidized_copper_grate:
+            into: minecraft:oxidized_copper_grate
             drops: {}
+          minecraft:waxed_oxidized_copper_door:
+            into: minecraft:oxidized_copper_door
+            drops: {}
+          minecraft:waxed_oxidized_chiseled_copper:
+            into: minecraft:oxidized_chiseled_copper
+            drops: {}
+          minecraft:waxed_copper_block:
+            into: minecraft:copper_block
+            drops: {}
+          minecraft:waxed_exposed_cut_copper_slab:
+            into: minecraft:exposed_cut_copper_slab
+            drops: {}
+          minecraft:waxed_oxidized_copper_trapdoor:
+            into: minecraft:oxidized_copper_trapdoor
+            drops: {}
+          minecraft:waxed_weathered_chiseled_copper:
+            into: minecraft:weathered_chiseled_copper
+            drops: {}
+          minecraft:waxed_exposed_copper:
+            into: minecraft:exposed_copper
+            drops: {}
+          minecraft:waxed_exposed_copper_bulb:
+            into: minecraft:exposed_copper_bulb
+            drops: {}
+          minecraft:waxed_exposed_chiseled_copper:
+            into: minecraft:exposed_chiseled_copper
+            drops: {}
+          minecraft:waxed_cut_copper_stairs:
+            into: minecraft:cut_copper_stairs
+            drops: {}
+          minecraft:waxed_copper_bulb:
+            into: minecraft:copper_bulb
+            drops: {}
+          minecraft:waxed_copper_trapdoor:
+            into: minecraft:copper_trapdoor
+            drops: {}
+          minecraft:waxed_weathered_copper_trapdoor:
+            into: minecraft:weathered_copper_trapdoor
+            drops: {}
+          minecraft:waxed_exposed_copper_door:
+            into: minecraft:exposed_copper_door
+            drops: {}
+          minecraft:waxed_copper_door:
+            into: minecraft:copper_door
+            drops: {}
+          minecraft:waxed_cut_copper:
+            into: minecraft:cut_copper
+            drops: {}
+          minecraft:waxed_oxidized_copper:
+            into: minecraft:oxidized_copper
+            drops: {}
+          minecraft:waxed_exposed_copper_trapdoor:
+            into: minecraft:exposed_copper_trapdoor
+            drops: {}
+          minecraft:waxed_exposed_cut_copper_stairs:
+            into: minecraft:exposed_cut_copper_stairs
+            drops: {}
+          minecraft:waxed_weathered_copper:
+            into: minecraft:weathered_copper
+            drops: {}
+          minecraft:waxed_exposed_copper_grate:
             into: minecraft:exposed_copper_grate
-          minecraft:weathered_copper_lantern:
             drops: {}
-            into: minecraft:exposed_copper_lantern
-          minecraft:exposed_copper_chest:
+          minecraft:waxed_weathered_cut_copper_slab:
+            into: minecraft:weathered_cut_copper_slab
             drops: {}
-            into: minecraft:copper_chest
-          minecraft:exposed_copper_grate:
+          minecraft:waxed_oxidized_cut_copper_stairs:
+            into: minecraft:oxidized_cut_copper_stairs
             drops: {}
+          minecraft:waxed_weathered_copper_grate:
+            into: minecraft:weathered_copper_grate
+            drops: {}
+          minecraft:waxed_chiseled_copper:
+            into: minecraft:chiseled_copper
+            drops: {}
+          minecraft:waxed_weathered_cut_copper:
+            into: minecraft:weathered_cut_copper
+            drops: {}
+          minecraft:waxed_copper_grate:
             into: minecraft:copper_grate
-          minecraft:oxidized_copper_chain:
             drops: {}
-            into: minecraft:weathered_copper_chain
+          minecraft:waxed_weathered_copper_bulb:
+            into: minecraft:weathered_copper_bulb
+            drops: {}
+        weatherables:
+          minecraft:exposed_cut_copper:
+            into: minecraft:cut_copper
+            drops: {}
+          minecraft:exposed_cut_copper_stairs:
+            into: minecraft:cut_copper_stairs
+            drops: {}
+          minecraft:weathered_cut_copper_slab:
+            into: minecraft:exposed_cut_copper_slab
+            drops: {}
+          minecraft:weathered_cut_copper:
+            into: minecraft:exposed_cut_copper
+            drops: {}
+          minecraft:weathered_copper_grate:
+            into: minecraft:exposed_copper_grate
+            drops: {}
+          minecraft:oxidized_cut_copper_slab:
+            into: minecraft:weathered_cut_copper_slab
+            drops: {}
+          minecraft:oxidized_copper_bulb:
+            into: minecraft:weathered_copper_bulb
+            drops: {}
+          minecraft:oxidized_cut_copper:
+            into: minecraft:weathered_cut_copper
+            drops: {}
+          minecraft:exposed_chiseled_copper:
+            into: minecraft:chiseled_copper
+            drops: {}
+          minecraft:oxidized_copper:
+            into: minecraft:weathered_copper
+            drops: {}
+          minecraft:exposed_copper_door:
+            into: minecraft:copper_door
+            drops: {}
+          minecraft:weathered_copper_door:
+            into: minecraft:exposed_copper_door
+            drops: {}
+          minecraft:weathered_copper:
+            into: minecraft:exposed_copper
+            drops: {}
+          minecraft:exposed_copper_trapdoor:
+            into: minecraft:copper_trapdoor
+            drops: {}
+          minecraft:exposed_copper:
+            into: minecraft:copper_block
+            drops: {}
+          minecraft:oxidized_cut_copper_stairs:
+            into: minecraft:weathered_cut_copper_stairs
+            drops: {}
+          minecraft:oxidized_copper_door:
+            into: minecraft:weathered_copper_door
+            drops: {}
+          minecraft:exposed_cut_copper_slab:
+            into: minecraft:cut_copper_slab
+            drops: {}
+          minecraft:weathered_chiseled_copper:
+            into: minecraft:exposed_chiseled_copper
+            drops: {}
+          minecraft:oxidized_copper_grate:
+            into: minecraft:weathered_copper_grate
+            drops: {}
+          minecraft:oxidized_chiseled_copper:
+            into: minecraft:weathered_chiseled_copper
+            drops: {}
+          minecraft:weathered_cut_copper_stairs:
+            into: minecraft:exposed_cut_copper_stairs
+            drops: {}
+          minecraft:weathered_copper_trapdoor:
+            into: minecraft:exposed_copper_trapdoor
+            drops: {}
+          minecraft:exposed_copper_bulb:
+            into: minecraft:copper_bulb
+            drops: {}
+          minecraft:oxidized_copper_trapdoor:
+            into: minecraft:weathered_copper_trapdoor
+            drops: {}
+          minecraft:weathered_copper_bulb:
+            into: minecraft:exposed_copper_bulb
+            drops: {}
+          minecraft:exposed_copper_grate:
+            into: minecraft:copper_grate
+            drops: {}
       hoe:
         tillables:
-          minecraft:dirt_path:
-            condition: air_above
-            drops: {}
-            into: minecraft:farmland
-          minecraft:coarse_dirt:
-            condition: air_above
-            drops: {}
-            into: minecraft:dirt
           minecraft:grass_block:
-            condition: air_above
             drops: {}
             into: minecraft:farmland
+            condition: air_above
           minecraft:dirt:
-            condition: air_above
             drops: {}
             into: minecraft:farmland
+            condition: air_above
           minecraft:rooted_dirt:
-            condition: always
             drops:
               minecraft:hanging_roots: 1.0
             into: minecraft:dirt
+            condition: always
+          minecraft:dirt_path:
+            drops: {}
+            into: minecraft:farmland
+            condition: air_above
+          minecraft:coarse_dirt:
+            drops: {}
+            into: minecraft:dirt
+            condition: air_above
         replant-crops: false
         replant-nether-warts: false
       shovel:
         flattenables:
-          minecraft:podzol:
-            drops: {}
-            into: minecraft:dirt_path
           minecraft:coarse_dirt:
-            drops: {}
             into: minecraft:dirt_path
+            drops: {}
           minecraft:rooted_dirt:
-            drops: {}
             into: minecraft:dirt_path
+            drops: {}
           minecraft:mycelium:
-            drops: {}
             into: minecraft:dirt_path
+            drops: {}
           minecraft:grass_block:
-            drops: {}
             into: minecraft:dirt_path
+            drops: {}
           minecraft:dirt:
-            drops: {}
             into: minecraft:dirt_path
+            drops: {}
+          minecraft:podzol:
+            into: minecraft:dirt_path
+            drops: {}
     ridable-settings:
       babies-are-ridable: true
       untamed-tamables-are-ridable: true
@@ -778,7 +649,6 @@ world-settings:
         attributes:
           max_health: 20.0
           scale: 1.0
-        can-pick-up-loot: default
         take-damage-from-water: false
         always-drop-exp: false
       armadillo:
@@ -847,16 +717,6 @@ world-settings:
         attributes:
           max_health: 16.0
           scale: 1.0
-        can-pick-up-loot: default
-      breeze:
-        ridable: false
-        ridable-in-water: true
-        controllable: true
-        attributes:
-          max_health: 30.0
-          scale: 1.0
-        takes-damage-from-water: false
-        always-drop-exp: false
       camel:
         ridable-in-water: false
         attributes:
@@ -871,19 +731,6 @@ world-settings:
             max: 0.09
         breeding-delay-ticks: 6000
         takes-damage-from-water: false
-        always-drop-exp: false
-      camel_husk:
-        ridable-in-water: false
-        attributes:
-          max_health:
-            min: 32.0
-            max: 32.0
-          jump_strength:
-            min: 0.42
-            max: 0.42
-          movement_speed:
-            min: 0.09
-            max: 0.09
         always-drop-exp: false
       cat:
         ridable: false
@@ -928,20 +775,6 @@ world-settings:
           scale: 1.0
         takes-damage-from-water: false
         always-drop-exp: false
-      copper_golem:
-        ridable: false
-        ridable-in-water: true
-        controllable: true
-        can-swim: false
-        attributes:
-          max_health: 12.0
-          step_height: 1.0
-          movement_speed: 0.2
-          scale: 1.0
-        takes-damage-from-water: false
-        always-drop-exp: false
-        can-open-barrel: false
-        can-open-shulker: false
       cow:
         ridable: false
         ridable-in-water: true
@@ -974,7 +807,7 @@ world-settings:
           scale: 1.0
         naturally-charged-chance: 0.0
         allow-griefing: true
-        mob-griefing-override: default
+        bypass-mob-griefing: false
         takes-damage-from-water: false
         explode-when-killed: false
         health-impacts-explosion: false
@@ -1025,7 +858,6 @@ world-settings:
         takes-damage-from-water: false
         can-break-doors: false
         always-drop-exp: false
-        can-pick-up-loot: default
         movement-speed: 0.23000000417232513
       elder_guardian:
         ridable: false
@@ -1043,7 +875,7 @@ world-settings:
         attributes:
           max_health: 200.0
         always-drop-full-exp: false
-        mob-griefing-override: default
+        bypass-mob-griefing: false
         takes-damage-from-water: false
         can-ride-vehicles: false
       enderman:
@@ -1055,7 +887,7 @@ world-settings:
           scale: 1.0
         allow-griefing: true
         can-despawn-with-held-block: false
-        mob-griefing-override: default
+        bypass-mob-griefing: false
         takes-damage-from-water: true
         aggressive-towards-endermites: true
         aggressive-towards-endermites-only-spawned-by-player-thrown-ender-pearls: false
@@ -1078,7 +910,7 @@ world-settings:
         attributes:
           max_health: 24.0
           scale: 1.0
-        mob-griefing-override: default
+        bypass-mob-griefing: false
         takes-damage-from-water: false
         always-drop-exp: false
       fox:
@@ -1090,10 +922,9 @@ world-settings:
           scale: 1.0
         tulips-change-type: false
         breeding-delay-ticks: 6000
-        mob-griefing-override: default
+        bypass-mob-griefing: false
         takes-damage-from-water: false
         always-drop-exp: false
-        can-pick-up-loot: default
       frog:
         ridable: false
         ridable-in-water: true
@@ -1156,18 +987,6 @@ world-settings:
           scale: 1.0
         takes-damage-from-water: false
         always-drop-exp: false
-      happy_ghast:
-        ridable-in-water: false
-        attributes:
-          max_health: 20.0
-          tempt_range: 16.0
-          flying_speed: 0.05
-          movement_speed: 0.05
-          follow_range: 16.0
-          camera_distance: 8.0
-          scale: 1.0
-        takes-damage-from-water: false
-        always-drop-exp: false
       hoglin:
         ridable: false
         ridable-in-water: true
@@ -1207,7 +1026,6 @@ world-settings:
           try-existing-chickens: true
         takes-damage-from-water: false
         always-drop-exp: false
-        can-pick-up-loot: default
         movement-speed: 0.23000000417232513
       illusioner:
         ridable: false
@@ -1284,15 +1102,6 @@ world-settings:
         breeding-delay-ticks: 6000
         takes-damage-from-water: false
         always-drop-exp: false
-      nautilus:
-        attributes:
-          max_health: 15.0
-          movement_speed: 1.0
-          attack_damage: 3.0
-          knockback_resistance: 0.3
-          scale: 1.0
-        breeding-delay-ticks: 6000
-        always-drop-exp: false
       ocelot:
         ridable: false
         ridable-in-water: true
@@ -1314,16 +1123,6 @@ world-settings:
         breeding-delay-ticks: 6000
         takes-damage-from-water: false
         always-drop-exp: false
-      parched:
-        ridable: false
-        ridable-in-water: true
-        controllable: true
-        attributes:
-          max_health: 16.0
-          scale: 1.0
-        takes-damage-from-water: false
-        always-drop-exp: false
-        can-pick-up-loot: default
       parrot:
         ridable: false
         ridable-in-water: true
@@ -1385,12 +1184,12 @@ world-settings:
         attributes:
           max_health: 16.0
           scale: 1.0
+        bypass-mob-griefing: false
         takes-damage-from-water: false
         portal-spawn-modifier: 2000
         always-drop-exp: false
         head-visibility-percent: 0.5
         ignores-armor-with-gold-trim: false
-        can-pick-up-loot: default
       piglin_brute:
         ridable: false
         ridable-in-water: true
@@ -1400,7 +1199,6 @@ world-settings:
           scale: 1.0
         takes-damage-from-water: false
         always-drop-exp: false
-        can-pick-up-loot: default
       pillager:
         ridable: false
         ridable-in-water: true
@@ -1408,9 +1206,9 @@ world-settings:
         attributes:
           max_health: 24.0
           scale: 1.0
+        bypass-mob-griefing: false
         takes-damage-from-water: false
         always-drop-exp: false
-        can-pick-up-loot: default
       polar_bear:
         ridable: false
         ridable-in-water: true
@@ -1440,7 +1238,7 @@ world-settings:
         spawn-toast-chance: 0.0
         spawn-killer-rabbit-chance: 0.0
         breeding-delay-ticks: 6000
-        mob-griefing-override: default
+        bypass-mob-griefing: false
         takes-damage-from-water: false
         always-drop-exp: false
       ravager:
@@ -1450,7 +1248,7 @@ world-settings:
         attributes:
           max_health: 100.0
           scale: 1.0
-        mob-griefing-override: default
+        bypass-mob-griefing: false
         takes-damage-from-water: false
         griefable-blocks:
         - minecraft:oak_leaves
@@ -1488,7 +1286,7 @@ world-settings:
           max_health: 8.0
           scale: 1.0
         breeding-delay-ticks: 6000
-        mob-griefing-override: default
+        bypass-mob-griefing: false
         takes-damage-from-water: false
         always-drop-exp: false
       shulker:
@@ -1516,7 +1314,7 @@ world-settings:
           scale: 1.0
           movement_speed: 0.25
           attack_damage: 1.0
-        mob-griefing-override: default
+        bypass-mob-griefing: false
         takes-damage-from-water: false
         always-drop-exp: false
       skeleton:
@@ -1531,7 +1329,6 @@ world-settings:
         head-visibility-percent: 0.5
         feed-wither-roses: 0
         bow-accuracy: 14 - difficulty * 4
-        can-pick-up-loot: default
       skeleton_horse:
         ridable: false
         ridable-in-water: true
@@ -1570,7 +1367,7 @@ world-settings:
         max-shoot-interval-ticks: 20
         snow-ball-modifier: 10.0
         attack-distance: 1.25
-        mob-griefing-override: default
+        bypass-mob-griefing: false
         takes-damage-from-water: true
         always-drop-exp: false
       sniffer:
@@ -1612,7 +1409,6 @@ world-settings:
           scale: 1.0
         takes-damage-from-water: false
         always-drop-exp: false
-        can-pick-up-loot: default
       strider:
         ridable: false
         ridable-in-water: false
@@ -1623,12 +1419,6 @@ world-settings:
         breeding-delay-ticks: 6000
         give-saddle-back: false
         takes-damage-from-water: true
-        always-drop-exp: false
-      sulfur_cube:
-        ridable: false
-        ridable-in-water: true
-        controllable: true
-        takes-damage-from-water: false
         always-drop-exp: false
       tadpole:
         ridable: false
@@ -1697,7 +1487,7 @@ world-settings:
         breeding-delay-ticks: 6000
         clerics-farm-warts: false
         cleric-wart-farmers-throw-warts-at-villagers: true
-        mob-griefing-override: default
+        bypass-mob-griefing: false
         takes-damage-from-water: false
         allow-trading: true
         always-drop-exp: false
@@ -1713,7 +1503,6 @@ world-settings:
         search-radius:
           acquire-poi: 24
           nearest-bed-sensor: 24
-        can-pick-up-loot: default
       vindicator:
         ridable: false
         ridable-in-water: true
@@ -1725,7 +1514,6 @@ world-settings:
           spawn-chance: 0.0
         takes-damage-from-water: false
         always-drop-exp: false
-        can-pick-up-loot: default
       wandering_trader:
         ridable: false
         ridable-in-water: true
@@ -1743,8 +1531,6 @@ world-settings:
         ridable: false
         ridable-in-water: true
         controllable: true
-        can-use-sonic-boom: true
-        can-ride-vehicles: false
         attributes:
           max_health: 500.0
         takes-damage-from-water: false
@@ -1768,7 +1554,7 @@ world-settings:
           scale: 1.0
         health-regen-amount: 1.0
         health-regen-delay: 20
-        mob-griefing-override: default
+        bypass-mob-griefing: false
         takes-damage-from-water: false
         can-ride-vehicles: false
         explosion-radius: 1.0
@@ -1783,7 +1569,6 @@ world-settings:
           scale: 1.0
         takes-damage-from-water: false
         always-drop-exp: false
-        can-pick-up-loot: default
       wolf:
         ridable: false
         ridable-in-water: true
@@ -1819,11 +1604,10 @@ world-settings:
           chance: 0.05
           try-existing-chickens: true
         aggressive-towards-villager-when-lagging: true
-        mob-griefing-override: default
+        bypass-mob-griefing: false
         takes-damage-from-water: false
         always-drop-exp: false
         head-visibility-percent: 0.5
-        can-pick-up-loot: default
         movement-speed: 0.23000000417232513
       zombie_horse:
         ridable: false
@@ -1841,14 +1625,6 @@ world-settings:
             max: 0.2
         spawn-chance: 0.0
         takes-damage-from-water: false
-        always-drop-exp: false
-      zombie_nautilus:
-        attributes:
-          max_health: 15.0
-          movement_speed: 1.1
-          attack_damage: 3.0
-          knockback_resistance: 0.3
-          scale: 1.0
         always-drop-exp: false
       zombie_villager:
         ridable: false
@@ -1869,7 +1645,6 @@ world-settings:
         cure:
           enabled: true
         always-drop-exp: false
-        can-pick-up-loot: default
         movement-speed: 0.23000000417232513
       zombified_piglin:
         ridable: false
@@ -1883,10 +1658,9 @@ world-settings:
           only-babies: true
           chance: 0.05
           try-existing-chickens: true
-        count-as-player-kill-when-angry: false
+        count-as-player-kill-when-angry: true
         takes-damage-from-water: false
         always-drop-exp: false
-        can-pick-up-loot: default
         movement-speed: 0.23000000417232513
     hunger:
       starvation-damage: 1.0
@@ -1894,6 +1668,9 @@ world-settings:
       entity:
         shared-random: true
     gameplay-mechanics:
+      daylight-cycle-ticks:
+        daytime: 12000
+        nighttime: 12000
       armorstand:
         step-height: 0.0
         set-name-visible-when-placing-with-custom-name: false
@@ -1914,8 +1691,9 @@ world-settings:
       raid-cooldown-seconds: 0
       animal-breeding-cooldown-seconds: 0
       persistent-droppable-entity-display-names: true
-      fireballs-mob-griefing-override: default
-      projectiles-mob-griefing-override: default
+      entities-pick-up-loot-bypass-mob-griefing: false
+      fireballs-bypass-mob-griefing: false
+      projectiles-bypass-mob-griefing: false
       note-block-ignore-above: false
       impose-teleport-restrictions-on-gateways: false
       impose-teleport-restrictions-on-nether-portals: false
@@ -1930,9 +1708,6 @@ world-settings:
       mob-last-hurt-by-player-time: 100
       milk-clears-beneficial-effects: true
       disable-oxidation-proximity-penalty: false
-      daylight-cycle-ticks:
-        daytime: 12000
-        nighttime: 12000
       drowning:
         air-ticks: 300
         ticks-per-damage: 20
@@ -1946,6 +1721,7 @@ world-settings:
         kinetic-damage: true
       infinity-bow:
         works-without-arrows: false
+      clamp-explosion-radius: true
       item:
         immune:
           cactus: []
@@ -2042,7 +1818,6 @@ world-settings:
         throwable-potion: 1.0
         trident: 1.0
         snowball: 1.0
-        wind-charge: 1.0
       projectile-damage:
         snowball: -1
       halloween:
