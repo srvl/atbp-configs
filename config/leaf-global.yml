@@ -99,7 +99,12 @@ performance:
       follow-parent: 10
       avoid-entity: 30
       temptation: 30
-      enderman-look-for-player: 30
+      enderman-look-for-player: 40
+  fast-biome-manager-seed-obfuscation:
+    # Replace vanilla SHA-256 seed obfuscation in BiomeManager with XXHash.
+    enabled: false
+    # Seed obfuscation key for XXHash.
+    seed-obfuscation-key: 5373415723924890787
   # Use faster random generator?
   # Requires a JVM that supports Xoroshiro128PlusPlus.
   # Some JREs don't support this.
@@ -118,17 +123,13 @@ performance:
   # Experimental feature.
   # Reuse BlockPos to reduce memory allocation slightly and improve performance on random ticking.
   # May conflict with certain plugins or operations. Disable if position issues occur.
-  reuse-random-ticking-blockpos: true
+  reuse-random-ticking-blockpos: false
   cache-biome:
     enabled: true
-    mob-spawning: true
+    mob-spawning: false
     advancements: true
   optimize-block-entities: true
   optimize-mob-despawn: false
-  optimize-end-surface-gen:
-    # Skip trivial End surface rule build process.
-    # May be incompatible with some datapacks that modify End world generation.
-    enabled: true
   # Whether to only tick / update items in main hand and offhand instead of the entire inventory.
   only-tick-items-in-hand: false
   optimize-mob-spawning: true
@@ -136,7 +137,7 @@ performance:
     disable-light-check: false
   # Whether to optimize player movement processing by skipping unnecessary edge checks and avoiding redundant view distance updates.
   optimize-player-movement: true
-  optimize-random-tick: true
+  optimize-random-tick: false
   optimize-waypoint: true
   # Whether to use optimized powered rails.
   # The implementation is based on RailOptimization made by GitHub@FxMorin
@@ -188,6 +189,10 @@ performance:
     async-chat-executor: true
     # Use the new Virtual Thread introduced in JDK 21 for profile fetching executor.
     download-pool: false
+    # Use the new Virtual Thread introduced in JDK 21 for user authentication.
+    auth-pool: true
+    # Use the new Virtual Thread introduced in JDK 21 for Paper task pool in configuration phase.
+    paper-configuration-pool: true
 
 ###########
 #  FIXES  #
@@ -280,7 +285,7 @@ gameplay-mechanisms:
     # Maximum delay (in ticks) between spawner spawns. Higher values slow down spawners.
     max-spawn-delay: 800
   use-spigot-item-merging-mechanism: false
-  use-vanilla-hopper: false
+  use-vanilla-hopper: true
 
 #############
 #  NETWORK  #
@@ -309,7 +314,7 @@ network:
     asteorbar-protocol: false
     chatimage-protocol: false
     xaero-map-protocol: false
-    xaero-map-server-id: -1134738775
+    xaero-map-server-id: -449121312
     syncmatica-protocol: false
     syncmatica-quota: false
     syncmatica-quota-limit: 40000000
@@ -344,9 +349,9 @@ misc:
   # This section contains lag compensation features,
   # which could ensure basic playing experience during a lag.
   lag-compensation:
-    enabled: true
-    enable-for-water: true
-    enable-for-lava: true
+    enabled: false
+    enable-for-water: false
+    enable-for-lava: false
   # Linear is a region format that uses zstd compression instead of zlib.
   # This format saves about 50% of disk space.
   # Read Leaf docs before using!

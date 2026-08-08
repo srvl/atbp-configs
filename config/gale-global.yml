@@ -32,6 +32,7 @@ log-to-console:
   set-block-in-far-chunk: true
   unrecognized-recipes: false
 misc:
+  ignore-null-legacy-structure-data: false
   keepalive:
     send-multiple: false
   last-tick-time-in-tps-command:
