@@ -1,0 +1,77 @@
+name: Update/Create Release for non-main branches
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  update_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create or update release for this branch (not main)
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const ref = context.ref;
+            if (!ref.startsWith('refs/heads/')) {
+              core.info(`Ref ${ref} is not a branch; skipping.`);
+              return;
+            }
+            const branch = ref.replace('refs/heads/', '');
+            if (branch === 'main') {
+              core.info('Branch is main; skipping release creation/update.');
+              return;
+            }
+
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            // Build a tag name using your existing pattern: "ver/<branch>"
+            // If you prefer a different tag format, update this line.
+            const tag = `ver/${branch}`;
+
+            core.info(`Branch: ${branch}`);
+            core.info(`Tag: ${tag}`);
+
+            // Prepare release payload
+            const releasePayload = {
+              owner,
+              repo,
+              tag_name: tag,
+              target_commitish: branch,
+              name: branch,
+              body: `Automated release for branch ${branch}`,
+              prerelease: true
+            };
+
+            try {
+              // Try to find existing release by tag
+              const existing = await github.rest.repos.getReleaseByTag({ owner, repo, tag });
+              core.info(`Found existing release (id=${existing.data.id}), updating it as prerelease.`);
+              await github.rest.repos.updateRelease({
+                owner,
+                repo,
+                release_id: existing.data.id,
+                tag_name: releasePayload.tag_name,
+                target_commitish: releasePayload.target_commitish,
+                name: releasePayload.name,
+                body: releasePayload.body,
+                prerelease: true
+              });
+              core.info('Release updated.');
+            } catch (err) {
+              if (err.status === 404) {
+                core.info('No existing release found for tag; creating a new prerelease.');
+                await github.rest.repos.createRelease(releasePayload);
+                core.info('Release created.');
+              } else {
+                core.setFailed(`Failed to get or update release: ${err.message}`);
+              }
+            }
