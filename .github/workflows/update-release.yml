@@ -20,7 +20,7 @@ jobs:
         uses: actions/github-script@v6
         env:
           # Add comma-separated branch names that should be marked as "latest"
-          LATEST_BRANCHES: "26.3"
+          LATEST_BRANCHES: "26.2"
         with:
           script: |
             const ref = context.ref;
