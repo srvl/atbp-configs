@@ -20,7 +20,7 @@ log-to-console:
     expired-message-warning: false
     not-secure-marker: true
   ignored-advancements: true
-  invalid-legacy-text-component: true
+  invalid-pool-element-error-log-level: info
   invalid-statistics: true
   legacy-material-initialization: false
   null-id-disconnections: true
@@ -32,8 +32,9 @@ log-to-console:
   set-block-in-far-chunk: true
   unrecognized-recipes: false
 misc:
+  ignore-null-legacy-structure-data: false
   keepalive:
-    send-multiple: false
+    send-multiple: true
   last-tick-time-in-tps-command:
     add-oversleep: false
     enabled: false
