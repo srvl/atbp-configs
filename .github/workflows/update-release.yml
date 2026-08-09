@@ -1,0 +1,116 @@
+name: Update/Create Release for non-main branches
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  update_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create or update release for this branch (not main)
+        uses: actions/github-script@v6
+        env:
+          # Add comma-separated branch names that should be marked as "latest"
+          LATEST_BRANCHES: "26.2"
+        with:
+          script: |
+            const ref = context.ref;
+            if (!ref.startsWith('refs/heads/')) {
+              core.info(`Ref ${ref} is not a branch; skipping.`);
+              return;
+            }
+            const branch = ref.replace('refs/heads/', '');
+            if (branch === 'main') {
+              core.info('Branch is main; skipping release creation/update.');
+              return;
+            }
+
+            // Parse whitelist from env variable
+            const whitelist = (process.env.LATEST_BRANCHES || '')
+              .split(',')
+              .map(b => b.trim());
+
+            const makeLatest = whitelist.includes(branch) ? 'true' : 'false';
+
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const tag = `ver/${branch}`;
+            const currentSha = context.sha;
+
+            core.info(`Branch: ${branch}`);
+            core.info(`Tag: ${tag}`);
+            core.info(`Commit SHA: ${currentSha}`);
+            core.info(`Mark as latest: ${makeLatest}`);
+
+            // 1. Force update or create the Git tag reference to point to the latest commit
+            const tagRef = `tags/${tag}`;
+            try {
+              await github.rest.git.updateRef({
+                owner,
+                repo,
+                ref: tagRef,
+                sha: currentSha,
+                force: true
+              });
+              core.info(`Force-updated git tag ref ${tagRef} to commit ${currentSha}`);
+            } catch (err) {
+              if (err.status === 404) {
+                await github.rest.git.createRef({
+                  owner,
+                  repo,
+                  ref: `refs/${tagRef}`,
+                  sha: currentSha
+                });
+                core.info(`Created git tag ref refs/${tagRef} at commit ${currentSha}`);
+              } else {
+                core.setFailed(`Failed to update git tag: ${err.message}`);
+                return;
+              }
+            }
+
+            // 2. Prepare release payload
+            const releasePayload = {
+              owner,
+              repo,
+              tag_name: tag,
+              target_commitish: branch,
+              name: branch,
+              body: `Automated release for branch ${branch}`,
+              prerelease: false,
+              make_latest: makeLatest
+            };
+
+            // 3. Create or update the release
+            try {
+              const existing = await github.rest.repos.getReleaseByTag({ owner, repo, tag });
+              core.info(`Found existing release (id=${existing.data.id}), updating metadata.`);
+              await github.rest.repos.updateRelease({
+                owner,
+                repo,
+                release_id: existing.data.id,
+                tag_name: releasePayload.tag_name,
+                target_commitish: releasePayload.target_commitish,
+                name: releasePayload.name,
+                body: releasePayload.body,
+                prerelease: false,
+                make_latest: makeLatest
+              });
+              core.info('Release updated.');
+            } catch (err) {
+              if (err.status === 404) {
+                core.info('No existing release found for tag; creating a new release.');
+                await github.rest.repos.createRelease(releasePayload);
+                core.info('Release created.');
+              } else {
+                core.setFailed(`Failed to get or update release: ${err.message}`);
+              }
+            }
