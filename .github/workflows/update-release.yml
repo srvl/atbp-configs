@@ -18,6 +18,9 @@ jobs:
 
       - name: Create or update release for this branch (not main)
         uses: actions/github-script@v6
+        env:
+          # Add comma-separated branch names that should be marked as "latest"
+          LATEST_BRANCHES: "26.2"
         with:
           script: |
             const ref = context.ref;
@@ -31,14 +34,21 @@ jobs:
               return;
             }
 
+            // Parse whitelist from env variable
+            const whitelist = (process.env.LATEST_BRANCHES || '')
+              .split(',')
+              .map(b => b.trim());
+
+            // Determine if current branch should be marked as latest ('true' or 'false')
+            const makeLatest = whitelist.includes(branch) ? 'true' : 'false';
+
             const owner = context.repo.owner;
             const repo = context.repo.repo;
-            // Build a tag name using your existing pattern: "ver/<branch>"
-            // If you prefer a different tag format, update this line.
             const tag = `ver/${branch}`;
 
             core.info(`Branch: ${branch}`);
             core.info(`Tag: ${tag}`);
+            core.info(`Mark as latest: ${makeLatest}`);
 
             // Prepare release payload
             const releasePayload = {
@@ -48,13 +58,14 @@ jobs:
               target_commitish: branch,
               name: branch,
               body: `Automated release for branch ${branch}`,
-              prerelease: true
+              prerelease: false,
+              make_latest: makeLatest
             };
 
             try {
               // Try to find existing release by tag
               const existing = await github.rest.repos.getReleaseByTag({ owner, repo, tag });
-              core.info(`Found existing release (id=${existing.data.id}), updating it as prerelease.`);
+              core.info(`Found existing release (id=${existing.data.id}), updating it.`);
               await github.rest.repos.updateRelease({
                 owner,
                 repo,
@@ -63,12 +74,13 @@ jobs:
                 target_commitish: releasePayload.target_commitish,
                 name: releasePayload.name,
                 body: releasePayload.body,
-                prerelease: true
+                prerelease: false,
+                make_latest: makeLatest
               });
               core.info('Release updated.');
             } catch (err) {
               if (err.status === 404) {
-                core.info('No existing release found for tag; creating a new prerelease.');
+                core.info('No existing release found for tag; creating a new release.');
                 await github.rest.repos.createRelease(releasePayload);
                 core.info('Release created.');
               } else {
