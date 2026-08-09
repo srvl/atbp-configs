@@ -1,22 +1,31 @@
-# This is the Spigot configuration file for Paper.
+# This is the main configuration file for Spigot.
 # As you can see, there's tons to configure. Some options may impact gameplay, so use
 # with caution, and make sure you know what each option does before configuring.
+# For a reference for any variable inside this file, check out the Spigot wiki at
+# http://www.spigotmc.org/wiki/spigot-configuration/
 #
-# If you need help with the configuration or have any questions related to Paper,
-# join us in our Discord or check the docs page.
+# If you need help with the configuration or have any questions related to Spigot,
+# join us at the Discord or drop by our forums and leave a post.
 #
-# File Reference: https://docs.papermc.io/paper/reference/spigot-configuration/
-# Docs: https://docs.papermc.io/
-# Discord: https://discord.gg/papermc
-# Website: https://papermc.io/
+# Discord: https://www.spigotmc.org/go/discord
+# Forums: http://www.spigotmc.org/
 
+messages:
+  whitelist: You are not whitelisted on this server!
+  server-full: The server is full!
+  outdated-client: Outdated client! Please use {0}
+  outdated-server: Outdated server! I'm still on {0}
+  restart: Server is restarting
+advancements:
+  disable-saving: false
+  disabled:
+  - minecraft:story/disabled
 settings:
-  debug: false
   bungeecord: false
+  save-user-cache-on-stop-only: false
   sample-count: 12
   player-shuffle: 0
   user-cache-size: 1000
-  save-user-cache-on-stop-only: false
   moved-wrongly-threshold: 10.0625
   moved-too-quickly-multiplier: 100.0
   timeout-time: 60
@@ -34,24 +43,22 @@ settings:
       max: 2048.0
   log-villager-deaths: true
   log-named-deaths: true
-messages:
-  whitelist: You are not whitelisted on this server!
-  server-full: The server is full!
-  outdated-client: Outdated client! Please use {0}
-  outdated-server: Outdated server! I'm still on {0}
-  restart: Server is restarting
-advancements:
-  disable-saving: false
-  disabled:
-  - minecraft:story/disabled
+  debug: false
 world-settings:
   default:
     below-zero-generation-in-existing-chunks: true
     view-distance: default
     simulation-distance: default
     thunder-chance: 100000
+    merge-radius:
+      item: 2.5
+      exp: 3.5
+    mob-spawn-range: 3
+    item-despawn-rate: 6000
+    arrow-despawn-rate: 1200
+    trident-despawn-rate: 1200
     zombie-aggressive-towards-villager: true
-    nerf-spawner-mobs: true
+    nerf-spawner-mobs: false
     enable-zombie-pigmen-portal-spawns: true
     wither-spawn-sound-radius: 0
     end-portal-sound-radius: 0
@@ -81,12 +88,12 @@ world-settings:
       glowberry-modifier: 100
       pitcherplant-modifier: 100
     entity-activation-range:
-      animals: 32
-      monsters: 32
-      raiders: 64
-      misc: 16
-      water: 16
-      villagers: 32
+      animals: 12
+      monsters: 24
+      raiders: 48
+      misc: 8
+      water: 8
+      villagers: 24
       flying-monsters: 32
       wake-up-inactive:
         animals-max-per-tick: 4
@@ -107,11 +114,11 @@ world-settings:
       tick-inactive-villagers: false
       ignore-spectators: false
     entity-tracking-range:
-      players: 64
-      animals: 64
-      monsters: 64
-      misc: 64
-      display: 96
+      players: 72
+      animals: 72
+      monsters: 72
+      misc: 72
+      display: 128
       other: 64
     ticks-per:
       hopper-transfer: 8
@@ -152,24 +159,17 @@ world-settings:
     max-tick-time:
       tile: 50
       entity: 50
-    merge-radius:
-      item: 2.5
-      exp: 3.5
-    mob-spawn-range: 3
-    item-despawn-rate: 6000
-    arrow-despawn-rate: 1200
-    trident-despawn-rate: 1200
     verbose: false
 players:
   disable-saving: false
-config-version: 13
+config-version: 12
 stats:
   disable-saving: false
   forced-stats: {}
 commands:
-  log: true
   tab-complete: 0
   send-namespaced: true
+  log: true
   spam-exclusions:
   - /skill
   silent-commandblock-console: false
