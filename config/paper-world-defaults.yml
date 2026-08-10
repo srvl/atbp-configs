@@ -341,7 +341,7 @@ tick-rates:
   mob-spawner: 1
   sensor:
     villager:
-      secondarypoisensor: 80
+      secondarypoisensor: 150
       nearestbedsensor: 80
       villagerbabiessensor: 40
       playersensor: 40
