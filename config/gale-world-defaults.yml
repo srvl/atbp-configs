@@ -11,6 +11,8 @@
 # Wiki: https://github.com/GaleMC/Gale/wiki
 # Discord: https://discord.gg/gwezNT8c24
 
+# Optimization by ATBP Hosting.
+
 _version: 1
 gameplay-mechanics:
   entities-can-random-stroll-into-non-ticking-chunks: true
