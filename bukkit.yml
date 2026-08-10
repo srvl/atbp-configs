@@ -9,6 +9,8 @@
 # Discord: https://discord.gg/papermc
 # Website: https://papermc.io/
 
+# Optimization by ATBP Hosting.
+
 settings:
   allow-end: true
   warn-on-overload: true
