@@ -63,7 +63,8 @@ jobs:
               });
               core.info(`Force-updated git tag ref ${tagRef} to commit ${currentSha}`);
             } catch (err) {
-              if (err.status === 404) {
+              // If updateRef fails (e.g., reference does not exist), try to create it.
+              try {
                 await github.rest.git.createRef({
                   owner,
                   repo,
@@ -71,13 +72,13 @@ jobs:
                   sha: currentSha
                 });
                 core.info(`Created git tag ref ${tagRef} at commit ${currentSha}`);
-              } else {
-                core.setFailed(`Failed to update git tag: ${err.message}`);
+              } catch (createErr) {
+                core.setFailed(`Failed to update or create git tag: ${createErr.message}`);
                 return;
               }
             }
 
-            // 2. Prepare release payload
+            // 2. Prepare release payload (do not include unsupported fields)
             const releasePayload = {
               owner,
               repo,
