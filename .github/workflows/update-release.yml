@@ -39,18 +39,45 @@ jobs:
               .split(',')
               .map(b => b.trim());
 
-            // Determine if current branch should be marked as latest ('true' or 'false')
             const makeLatest = whitelist.includes(branch) ? 'true' : 'false';
 
             const owner = context.repo.owner;
             const repo = context.repo.repo;
             const tag = `ver/${branch}`;
+            const currentSha = context.sha;
 
             core.info(`Branch: ${branch}`);
             core.info(`Tag: ${tag}`);
+            core.info(`Commit SHA: ${currentSha}`);
             core.info(`Mark as latest: ${makeLatest}`);
 
-            // Prepare release payload
+            // 1. Force update or create the Git tag reference to point to the latest commit
+            const tagRef = `tags/${tag}`;
+            try {
+              await github.rest.git.updateRef({
+                owner,
+                repo,
+                ref: tagRef,
+                sha: currentSha,
+                force: true
+              });
+              core.info(`Force-updated git tag ref ${tagRef} to commit ${currentSha}`);
+            } catch (err) {
+              if (err.status === 404) {
+                await github.rest.git.createRef({
+                  owner,
+                  repo,
+                  ref: `refs/${tagRef}`,
+                  sha: currentSha
+                });
+                core.info(`Created git tag ref refs/${tagRef} at commit ${currentSha}`);
+              } else {
+                core.setFailed(`Failed to update git tag: ${err.message}`);
+                return;
+              }
+            }
+
+            // 2. Prepare release payload
             const releasePayload = {
               owner,
               repo,
@@ -62,10 +89,10 @@ jobs:
               make_latest: makeLatest
             };
 
+            // 3. Create or update the release
             try {
-              // Try to find existing release by tag
               const existing = await github.rest.repos.getReleaseByTag({ owner, repo, tag });
-              core.info(`Found existing release (id=${existing.data.id}), updating it.`);
+              core.info(`Found existing release (id=${existing.data.id}), updating metadata.`);
               await github.rest.repos.updateRelease({
                 owner,
                 repo,
