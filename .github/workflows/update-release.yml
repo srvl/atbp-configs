@@ -52,7 +52,7 @@ jobs:
             core.info(`Mark as latest: ${makeLatest}`);
 
             // 1. Force update or create the Git tag reference to point to the latest commit
-            const tagRef = `tags/${tag}`;
+            const tagRef = `refs/tags/${tag}`;
             try {
               await github.rest.git.updateRef({
                 owner,
@@ -67,10 +67,10 @@ jobs:
                 await github.rest.git.createRef({
                   owner,
                   repo,
-                  ref: `refs/${tagRef}`,
+                  ref: tagRef,
                   sha: currentSha
                 });
-                core.info(`Created git tag ref refs/${tagRef} at commit ${currentSha}`);
+                core.info(`Created git tag ref ${tagRef} at commit ${currentSha}`);
               } else {
                 core.setFailed(`Failed to update git tag: ${err.message}`);
                 return;
@@ -85,8 +85,7 @@ jobs:
               target_commitish: branch,
               name: branch,
               body: `Automated release for branch ${branch}`,
-              prerelease: false,
-              make_latest: makeLatest
+              prerelease: false
             };
 
             // 3. Create or update the release
@@ -101,8 +100,7 @@ jobs:
                 target_commitish: releasePayload.target_commitish,
                 name: releasePayload.name,
                 body: releasePayload.body,
-                prerelease: false,
-                make_latest: makeLatest
+                prerelease: false
               });
               core.info('Release updated.');
             } catch (err) {
