@@ -23,7 +23,7 @@ bedrock:
 
   # Some hosting services change your Java port everytime you start the server and require the same port to be used for Bedrock.
   # This option makes the Bedrock port the same as the Java port every time you start the server.
-  clone-remote-port: true
+  clone-remote-port: false
 
 # Network settings for the Java server connection
 java:
