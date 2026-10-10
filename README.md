@@ -14,6 +14,6 @@ This repository is intended to be used as a release-oriented config archive:
 
 - PaperMC configs organized by Minecraft version under the paper/ directory
 - LeafMC configs organized by Minecraft version under the leafmc/ directory
-- Geyser configuration files, including geyser/config.yml with clone-remote-port enabled
+- Geyser configuration files (plugins/Geyser-Spigot/config.yml) with clone-remote-port off: on port-range nodes Bedrock gets its own port from the Bedrock range, set in Geyser's bedrock.port
 
 This repository is intentionally focused on storing ready-to-use config bundles for each supported version.
