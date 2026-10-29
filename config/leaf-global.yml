@@ -100,7 +100,7 @@ performance:
     # WARNING: This will affect world generation!!!
     enable-for-worldgen: false
     # Warn if you are not using legacy random source for slime chunk generation.
-    warn-for-slime-chunk: true
+    warn-for-slime-chunk: false
     # Use legacy random source for slime chunk generation,
     # to follow vanilla behavior.
     use-legacy-random-for-slime-chunk: true
