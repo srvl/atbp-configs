@@ -63,7 +63,8 @@ jobs:
               });
               core.info(`Force-updated git tag ref ${tagRef} to commit ${currentSha}`);
             } catch (err) {
-              if (err.status === 404) {
+              // GitHub returns 422 (not 404) when updating a ref that does not exist yet
+              if (err.status === 404 || err.status === 422) {
                 await github.rest.git.createRef({
                   owner,
                   repo,
