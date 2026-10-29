@@ -1,37 +1,23 @@
-# This is the main configuration file for Spigot.
+# This is the Spigot configuration file for Paper.
 # As you can see, there's tons to configure. Some options may impact gameplay, so use
 # with caution, and make sure you know what each option does before configuring.
-# For a reference for any variable inside this file, check out the Spigot wiki at
-# http://www.spigotmc.org/wiki/spigot-configuration/
 #
-# If you need help with the configuration or have any questions related to Spigot,
-# join us at the Discord or drop by our forums and leave a post.
+# If you need help with the configuration or have any questions related to Paper,
+# join us in our Discord or check the docs page.
 #
-# Discord: https://www.spigotmc.org/go/discord
-# Forums: http://www.spigotmc.org/
+# File Reference: https://docs.papermc.io/paper/reference/spigot-configuration/
+# Docs: https://docs.papermc.io/
+# Discord: https://discord.gg/papermc
+# Website: https://papermc.io/
 
-messages:
-  whitelist: You are not whitelisted on this server!
-  server-full: The server is full!
-  outdated-client: Outdated client! Please use {0}
-  outdated-server: Outdated server! I'm still on {0}
-  restart: Server is restarting
-advancements:
-  disable-saving: false
-  disabled:
-  - minecraft:story/disabled
 settings:
-  bungeecord: false
-  save-user-cache-on-stop-only: false
-  sample-count: 12
-  player-shuffle: 0
-  user-cache-size: 1000
-  moved-wrongly-threshold: 10.0625
-  moved-too-quickly-multiplier: 100.0
+  debug: false
   timeout-time: 60
   restart-on-crash: true
   restart-script: ./start.sh
-  netty-threads: 4
+  log-villager-deaths: true
+  log-named-deaths: true
+  sample-count: 12
   attribute:
     maxAbsorption:
       max: 2048.0
@@ -41,52 +27,43 @@ settings:
       max: 1024.0
     attackDamage:
       max: 2048.0
-  log-villager-deaths: true
-  log-named-deaths: true
-  debug: false
+  moved-too-quickly-multiplier: 100.0
+  player-shuffle: 0
+  user-cache-size: 1000
+  netty-threads: 4
+  moved-wrongly-threshold: 10.0625
+  save-user-cache-on-stop-only: false
+  bungeecord: false
 world-settings:
   default:
     below-zero-generation-in-existing-chunks: true
-    view-distance: default
-    simulation-distance: default
     thunder-chance: 100000
+    hunger:
+      jump-walk-exhaustion: 0.05
+      jump-sprint-exhaustion: 0.2
+      combat-exhaustion: 0.1
+      regen-exhaustion: 6.0
+      swim-multiplier: 0.01
+      sprint-multiplier: 0.1
+      other-multiplier: 0.0
     merge-radius:
-      item: 2.5
       exp: 3.5
-    mob-spawn-range: 3
+      item: 2.5
+    ticks-per:
+      hopper-transfer: 8
+      hopper-check: 1
+    hopper-amount: 1
+    hopper-can-load-chunks: false
+    zombie-aggressive-towards-villager: true
+    enable-zombie-pigmen-portal-spawns: true
     item-despawn-rate: 6000
+    mob-spawn-range: 3
     arrow-despawn-rate: 1200
     trident-despawn-rate: 1200
-    zombie-aggressive-towards-villager: true
-    nerf-spawner-mobs: false
-    enable-zombie-pigmen-portal-spawns: true
     wither-spawn-sound-radius: 0
+    nerf-spawner-mobs: false
     end-portal-sound-radius: 0
-    hanging-tick-frequency: 100
     unload-frozen-chunks: false
-    growth:
-      cactus-modifier: 100
-      cane-modifier: 100
-      melon-modifier: 100
-      mushroom-modifier: 100
-      pumpkin-modifier: 100
-      sapling-modifier: 100
-      beetroot-modifier: 100
-      carrot-modifier: 100
-      potato-modifier: 100
-      torchflower-modifier: 100
-      wheat-modifier: 100
-      netherwart-modifier: 100
-      vine-modifier: 100
-      cocoa-modifier: 100
-      bamboo-modifier: 100
-      sweetberry-modifier: 100
-      kelp-modifier: 100
-      twistingvines-modifier: 100
-      weepingvines-modifier: 100
-      cavevines-modifier: 100
-      glowberry-modifier: 100
-      pitcherplant-modifier: 100
     entity-activation-range:
       animals: 12
       monsters: 24
@@ -113,19 +90,6 @@ world-settings:
       villagers-active-for-panic: true
       tick-inactive-villagers: false
       ignore-spectators: false
-    entity-tracking-range:
-      players: 72
-      animals: 72
-      monsters: 72
-      misc: 72
-      display: 128
-      other: 64
-    ticks-per:
-      hopper-transfer: 8
-      hopper-check: 1
-    hopper-amount: 1
-    hopper-can-load-chunks: false
-    dragon-death-sound-radius: 0
     seed-village: 10387312
     seed-desert: 14357617
     seed-igloo: 14357618
@@ -147,22 +111,58 @@ world-settings:
     seed-buriedtreasure: 10387320
     seed-mineshaft: default
     seed-stronghold: default
-    hunger:
-      jump-walk-exhaustion: 0.05
-      jump-sprint-exhaustion: 0.2
-      combat-exhaustion: 0.1
-      regen-exhaustion: 6.0
-      swim-multiplier: 0.01
-      sprint-multiplier: 0.1
-      other-multiplier: 0.0
-    max-tnt-per-tick: 100
+    growth:
+      cactus-modifier: 100
+      cane-modifier: 100
+      melon-modifier: 100
+      mushroom-modifier: 100
+      pumpkin-modifier: 100
+      sapling-modifier: 100
+      beetroot-modifier: 100
+      carrot-modifier: 100
+      potato-modifier: 100
+      torchflower-modifier: 100
+      wheat-modifier: 100
+      netherwart-modifier: 100
+      vine-modifier: 100
+      cocoa-modifier: 100
+      bamboo-modifier: 100
+      sweetberry-modifier: 100
+      kelp-modifier: 100
+      twistingvines-modifier: 100
+      weepingvines-modifier: 100
+      cavevines-modifier: 100
+      glowberry-modifier: 100
+      pitcherplant-modifier: 100
+    entity-tracking-range:
+      players: 72
+      animals: 72
+      monsters: 72
+      misc: 72
+      display: 128
+      other: 64
     max-tick-time:
       tile: 50
       entity: 50
+    dragon-death-sound-radius: 0
+    max-tnt-per-tick: 100
+    hanging-tick-frequency: 100
+    view-distance: default
+    simulation-distance: default
     verbose: false
+messages:
+  restart: Server is restarting
+  whitelist: You are not whitelisted on this server!
+  server-full: The server is full!
+  outdated-client: Outdated client! Please use {0}
+  outdated-server: Outdated server! I'm still on {0}
 players:
   disable-saving: false
-config-version: 12
+advancements:
+  disable-saving: false
+  disabled:
+  - minecraft:story/disabled
+config-version: 13
 stats:
   disable-saving: false
   forced-stats: {}
