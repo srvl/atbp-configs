@@ -31,7 +31,6 @@ spawn-limits:
   ambient: 1
 chunk-gc:
   period-in-ticks: 400
-aliases: now-in-commands.yml
 ticks-per:
   animal-spawns: 500
   monster-spawns: 2
@@ -41,3 +40,4 @@ ticks-per:
   axolotl-spawns: 100
   ambient-spawns: 99999
   autosave: 6000
+aliases: now-in-commands.yml
