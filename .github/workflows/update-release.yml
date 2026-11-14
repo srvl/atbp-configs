@@ -20,7 +20,7 @@ jobs:
         uses: actions/github-script@v6
         env:
           # Add comma-separated branch names that should be marked as "latest"
-          LATEST_BRANCHES: "26.2"
+          LATEST_BRANCHES: "26.3"
         with:
           script: |
             const ref = context.ref;
@@ -29,8 +29,9 @@ jobs:
               return;
             }
             const branch = ref.replace('refs/heads/', '');
-            if (branch === 'main') {
-              core.info('Branch is main; skipping release creation/update.');
+            // Only config-set branches get a ver/ tag: a PR branch tag would show up as a config set for a version that does not exist.
+            if (!/^([0-9][0-9.]*|Bedrock)$/.test(branch)) {
+              core.info(`Branch ${branch} is not a config-set branch; skipping release creation/update.`);
               return;
             }
 
@@ -63,7 +64,8 @@ jobs:
               });
               core.info(`Force-updated git tag ref ${tagRef} to commit ${currentSha}`);
             } catch (err) {
-              if (err.status === 404) {
+              // GitHub returns 422 (not 404) when updating a ref that does not exist yet
+              if (err.status === 404 || err.status === 422) {
                 await github.rest.git.createRef({
                   owner,
                   repo,
