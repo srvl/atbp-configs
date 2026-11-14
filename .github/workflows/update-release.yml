@@ -29,8 +29,9 @@ jobs:
               return;
             }
             const branch = ref.replace('refs/heads/', '');
-            if (branch === 'main') {
-              core.info('Branch is main; skipping release creation/update.');
+            // Only config-set branches get a ver/ tag: a PR branch tag would show up as a config set for a version that does not exist.
+            if (!/^([0-9][0-9.]*|Bedrock)$/.test(branch)) {
+              core.info(`Branch ${branch} is not a config-set branch; skipping release creation/update.`);
               return;
             }
 
