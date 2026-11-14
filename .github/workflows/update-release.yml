@@ -20,7 +20,7 @@ jobs:
         uses: actions/github-script@v6
         env:
           # Add comma-separated branch names that should be marked as "latest"
-          LATEST_BRANCHES: "26.2"
+          LATEST_BRANCHES: "26.3"
         with:
           script: |
             const ref = context.ref;
@@ -29,8 +29,9 @@ jobs:
               return;
             }
             const branch = ref.replace('refs/heads/', '');
-            if (branch === 'main') {
-              core.info('Branch is main; skipping release creation/update.');
+            // Only config-set branches get a ver/ tag: a PR branch tag would show up as a config set for a version that does not exist.
+            if (!/^([0-9][0-9.]*|Bedrock)$/.test(branch)) {
+              core.info(`Branch ${branch} is not a config-set branch; skipping release creation/update.`);
               return;
             }
 
@@ -52,7 +53,7 @@ jobs:
             core.info(`Mark as latest: ${makeLatest}`);
 
             // 1. Force update or create the Git tag reference to point to the latest commit
-            const tagRef = `refs/tags/${tag}`;
+            const tagRef = `tags/${tag}`;
             try {
               await github.rest.git.updateRef({
                 owner,
@@ -63,22 +64,22 @@ jobs:
               });
               core.info(`Force-updated git tag ref ${tagRef} to commit ${currentSha}`);
             } catch (err) {
-              // If updateRef fails (e.g., reference does not exist), try to create it.
-              try {
+              // GitHub returns 422 (not 404) when updating a ref that does not exist yet
+              if (err.status === 404 || err.status === 422) {
                 await github.rest.git.createRef({
                   owner,
                   repo,
-                  ref: tagRef,
+                  ref: `refs/${tagRef}`,
                   sha: currentSha
                 });
-                core.info(`Created git tag ref ${tagRef} at commit ${currentSha}`);
-              } catch (createErr) {
-                core.setFailed(`Failed to update or create git tag: ${createErr.message}`);
+                core.info(`Created git tag ref refs/${tagRef} at commit ${currentSha}`);
+              } else {
+                core.setFailed(`Failed to update git tag: ${err.message}`);
                 return;
               }
             }
 
-            // 2. Prepare release payload (do not include unsupported fields)
+            // 2. Prepare release payload
             const releasePayload = {
               owner,
               repo,
@@ -86,7 +87,8 @@ jobs:
               target_commitish: branch,
               name: branch,
               body: `Automated release for branch ${branch}`,
-              prerelease: false
+              prerelease: false,
+              make_latest: makeLatest
             };
 
             // 3. Create or update the release
@@ -101,7 +103,8 @@ jobs:
                 target_commitish: releasePayload.target_commitish,
                 name: releasePayload.name,
                 body: releasePayload.body,
-                prerelease: false
+                prerelease: false,
+                make_latest: makeLatest
               });
               core.info('Release updated.');
             } catch (err) {
